@@ -1,18 +1,23 @@
 package it.polito.tdp.borders.model;
 
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import org.jgrapht.Graph;
 import org.jgrapht.Graphs;
 import org.jgrapht.alg.ConnectivityInspector;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.DefaultWeightedEdge;
 import org.jgrapht.graph.SimpleGraph;
+import org.jgrapht.traverse.BreadthFirstIterator;
 
 import it.polito.tdp.borders.db.BordersDAO;
+
 
 public class Model {
 	
@@ -88,5 +93,14 @@ List<Border> archi;
 		}
 		return count;
 	}
+	public List<Country> loadAllCountries(){
+		return dao.loadAllCountries();
+	}
+	public List<Country> trovaVicini( Graph<Country, DefaultEdge> grafo, Country partenza) {
+		//BreadthFirstIterator<Country, DefaultEdge> it = new BreadthFirstIterator<>(grafo,partenza);
+		return Graphs.neighborListOf(grafo, partenza);
+		
+	}
+	
 	
 }
